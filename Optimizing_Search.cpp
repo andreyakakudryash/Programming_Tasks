@@ -231,17 +231,22 @@ double measure_sort_time(vector<int>& arr) {
     return duration.count();
 }
 
-void test_sort(int max_size, int step) {
+void test_sort() {
     cout << "N\t\tВремя сортировки \n";
+    int n = 0;
+    int step = 100;
+    while (n < 3000) {
+        int size = n + step;
 
-    for (int size = step; size <= max_size; size *= step) {
         vector<int> arr(size);
         for (int i = 0; i < size; ++i) {
-            arr[i] = rand() % (max_size * 10);
+            arr[i] = rand() % (size);
+
         }
-        double sort_time = measure_sort_time(arr);
-        cout << size << "\t\t" << fixed << setprecision(7) << sort_time << "\n";
-    }
+            double sort_time = measure_sort_time(arr);
+            cout << size << "\t\t" << fixed << setprecision(7) << sort_time << "\n";
+            n += step;
+        }
 
 }
 
@@ -322,13 +327,8 @@ int main() {
         }
 
         else if (choice == 4) {
-            int max_size, step;
-            cout << "Введите максимальный размер массива для теста: ";
-            cin >> max_size;
-            cout << "Введите шаг увеличения массива: ";
-            cin >> step;
-
-            test_sort(max_size, step);
+            
+            test_sort();
         }
 
         else if (choice == 0) {
